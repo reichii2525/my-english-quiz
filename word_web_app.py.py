@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import random
 
-# --- ページ設定（スマホ最適化） ---
+# --- ページ設定 ---
 st.set_page_config(page_title="英単語クイズ", layout="centered")
 
 st.markdown("""
@@ -25,17 +25,16 @@ def load_data():
 # セッション状態の初期化
 if 'words' not in st.session_state:
     st.session_state.words = load_data()
-    st.session_state.queue = st.session_state.words.copy()
-    st.session_state.wrong_list = []
-    st.session_state.correct_count = 0  # 今回のラウンドでの正解数
-    st.session_state.total_in_round = len(st.session_state.queue) # ラウンド開始時の総数
+    st.session_state.queue = st.session_state.words.copy() # 今回解く問題
+    st.session_state.wrong_list = [] # 今回間違えた問題
+    st.session_state.mastered_count = 0 # 累計正解数
+    st.session_state.total_count = len(st.session_state.words) # 全体の問題数
     st.session_state.current_question = None
     st.session_state.round = 1
-    st.session_state.show_result = False # 正答率表示フラグ
+    st.session_state.show_result = False
 
 def next_question():
     if not st.session_state.queue:
-        # ラウンド終了、正答率表示画面へ
         st.session_state.show_result = True
     else:
         st.session_state.current_question = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
@@ -43,26 +42,24 @@ def next_question():
 # --- メイン画面 ---
 st.title(f"英単語クイズ R{st.session_state.round}")
 
-# 正答率表示画面
+# ラウンド終了後の結果表示
 if st.session_state.show_result:
-    accuracy = (st.session_state.correct_count / st.session_state.total_in_round) * 100
-    st.subheader(f"Round {st.session_state.round} 終了！")
-    st.metric("今回の正答率", f"{accuracy:.1f}%")
+    # 累計の正答率を計算
+    accuracy = (st.session_state.mastered_count / st.session_state.total_count) * 100
+    st.subheader(f"Round {st.session_state.round} 終了")
+    st.metric("現在の総正答率", f"{accuracy:.1f}%")
     
     if not st.session_state.wrong_list:
         st.balloons()
-        st.success("全問正解です！パーフェクト！")
+        st.success(f"全{st.session_state.total_count}問、すべて正解しました！")
         if st.button("最初からやり直す"):
             st.session_state.clear()
             st.rerun()
     else:
-        st.warning(f"{len(st.session_state.wrong_list)}問間違えました。次はこれだけを解きます！")
-        if st.button("次のラウンドへ"):
-            # 間違えたリストを次の出題リストにセット
+        st.write(f"残り {len(st.session_state.wrong_list)} 問です。")
+        if st.button("間違えた問題に再挑戦"):
             st.session_state.queue = st.session_state.wrong_list.copy()
             st.session_state.wrong_list = []
-            st.session_state.total_in_round = len(st.session_state.queue)
-            st.session_state.correct_count = 0
             st.session_state.round += 1
             st.session_state.show_result = False
             next_question()
@@ -74,7 +71,7 @@ else:
         next_question()
 
     q = st.session_state.current_question
-    st.write(f"残り: {len(st.session_state.queue) + 1}問 / 今回のミス: {len(st.session_state.wrong_list)}問")
+    st.write(f"このラウンド: 残り {len(st.session_state.queue) + 1}問 / 全体正解: {st.session_state.mastered_count}問")
     st.subheader(f"「{q['word']}」の意味は？")
 
     all_meanings = [w['meaning'] for w in st.session_state.words]
@@ -85,13 +82,14 @@ else:
         if st.button(opt):
             if opt == q['meaning']:
                 st.toast("正解！", icon="✅")
-                st.session_state.correct_count += 1
+                st.session_state.mastered_count += 1
                 next_question()
                 st.rerun()
             else:
                 st.error(f"正解は「{q['meaning']}」")
                 if q not in st.session_state.wrong_list:
                     st.session_state.wrong_list.append(q)
+                # 間違えてもすぐに次に進む
                 if st.button("次へ"):
                     next_question()
                     st.rerun()

@@ -1,96 +1,85 @@
 import streamlit as st
 import pandas as pd
 import random
-import os
 
-# ページの設定（スマホで見やすいようにタイトルなどを設定）
-st.set_page_config(page_title="英単語マスター", page_icon="📝")
+# --- ページ設定（スマホで見やすく） ---
+st.set_page_config(page_title="英単語クイズ", layout="centered")
 
-# スタイル調整（ボタンを大きく、中央寄せに）
+# CSSで見た目をさらにコンパクトに調整
 st.markdown("""
     <style>
-    div.stButton > button {
-        width: 100%;
-        font-size: 20px;
-        height: 3em;
-        margin-bottom: 10px;
-    }
-    .question-text {
-        font-size: 32px;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 30px;
-    }
+    .stButton button { width: 100%; margin-bottom: -10px; }
+    .reportview-container .main .block-container { padding-top: 1rem; }
+    h1 { font-size: 1.5rem !important; }
     </style>
     """, unsafe_allow_html=True)
 
-# データの読み込み
+# --- データの読み込み ---
 @st.cache_data
 def load_data():
-    file_path = '英単語 - シート1.csv'
-    if os.path.exists(file_path):
-        df = pd.read_csv(file_path, header=None, names=['english', 'japanese'], encoding='utf-8-sig')
-        return df.to_dict('records')
-    return []
+    df = pd.read_csv('英単語 - シート1.csv')
+    return df.to_dict('records')
 
-# セッション状態（クイズの進行状況）の管理
-if 'pool' not in st.session_state:
-    word_list = load_data()
-    st.session_state.pool = word_list.copy()
-    st.session_state.all_japanese = [w['japanese'] for w in word_list]
+if 'words' not in st.session_state:
+    st.session_state.words = load_data()
+    # 出題待ちリスト（最初は全問）
+    st.session_state.queue = st.session_state.words.copy()
+    # 間違えた単語リスト
+    st.session_state.wrong_list = []
     st.session_state.current_question = None
-    st.session_state.options = []
-    st.session_state.message = ""
-    st.session_state.msg_type = "info"
+    st.session_state.round = 1
 
 def next_question():
-    if st.session_state.pool:
-        st.session_state.current_question = random.choice(st.session_state.pool)
-        options = [st.session_state.current_question['japanese']]
-        others = [j for j in st.session_state.all_japanese if j != st.session_state.current_question['japanese']]
-        options.extend(random.sample(others, min(len(others), 4)))
-        random.shuffle(options)
-        st.session_state.options = options
-        st.session_state.message = ""
+    if not st.session_state.queue:
+        # 現在のラウンドが終了
+        if not st.session_state.wrong_list:
+            st.session_state.finished = True
+        else:
+            # 間違えた単語を次のラウンドの出題リストへ
+            st.session_state.queue = st.session_state.wrong_list.copy()
+            st.session_state.wrong_list = []
+            st.session_state.round += 1
+            st.session_state.current_question = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
+    else:
+        st.session_state.current_question = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
 
-# 初回起動時
-if st.session_state.current_question is None:
-    next_question()
+# --- メイン画面 ---
+st.title(f"英単語クイズ (Round {st.session_state.round})")
 
-# メイン画面
-st.title("🚀 英単語マスター")
-
-if not st.session_state.pool:
+if 'finished' in st.session_state and st.session_state.finished:
     st.balloons()
-    st.success("全問正解！お疲れ様でした！")
-    if st.button("もう一度最初から"):
-        st.session_state.pool = load_data().copy()
-        next_question()
+    st.success("全問正解です！お疲れ様でした！")
+    if st.button("もう一度最初から解く"):
+        st.session_state.clear()
         st.rerun()
 else:
-    st.write(f"残り: {len(st.session_state.pool)} 問")
-    
-    # 問題表示
-    st.markdown(f'<p class="question-text">{st.session_state.current_question["english"]}</p>', unsafe_allow_html=True)
+    if st.session_state.current_question is None:
+        next_question()
 
-    # 選択肢ボタン
-    for i, opt in enumerate(st.session_state.options):
-        if st.button(opt, key=f"btn_{i}"):
-            if opt == st.session_state.current_question['japanese']:
-                st.session_state.pool.remove(st.session_state.current_question)
-                st.session_state.message = f"〇 正解！ 「{opt}」"
-                st.session_state.msg_type = "success"
+    q = st.session_state.current_question
+    
+    # 残り問題数の表示
+    st.write(f"残り: {len(st.session_state.queue) + 1}問 / ミス: {len(st.session_state.wrong_list)}問")
+    
+    # 出題
+    st.subheader(f"「{q['単語']}」の意味は？")
+
+    # 選択肢の作成（正解 + ランダムな3つ）
+    all_meanings = [w['意味'] for w in st.session_state.words]
+    wrong_options = random.sample([m for m in all_meanings if m != q['意味']], 3)
+    options = random.sample(wrong_options + [q['意味']], 4)
+
+    # 判定
+    for opt in options:
+        if st.button(opt):
+            if opt == q['意味']:
+                st.toast("正解！", icon="✅")
                 next_question()
                 st.rerun()
             else:
-                st.session_state.message = f"× 不正解（正解: {st.session_state.current_question['japanese']}）"
-                st.session_state.msg_type = "error"
-                next_question()
-                st.rerun()
-
-# 結果表示
-if st.session_state.message:
-    if st.session_state.msg_type == "success":
-        st.success(st.session_state.message)
-    else:
-        st.error(st.session_state.message)
+                st.error(f"不正解... 正解は「{q['意味']}」でした")
+                if q not in st.session_state.wrong_list:
+                    st.session_state.wrong_list.append(q)
+                if st.button("次の問題へ"):
+                    next_question()
+                    st.rerun()

@@ -17,7 +17,6 @@ st.markdown("""
 # --- データの読み込み ---
 @st.cache_data
 def load_data():
-    # ファイル名は以前の指示通り
     df = pd.read_csv('英単語 - シート1.csv')
     df.columns = ['word', 'meaning'] + list(df.columns[2:])
     return df.to_dict('records')
@@ -32,7 +31,9 @@ if 'words' not in st.session_state:
     st.session_state.round = 1
     st.session_state.show_result = False
     st.session_state.current_q = None
-    st.session_state.is_wrong_mode = False # 不正解確認モードかどうか
+    # 判定表示用のフラグ
+    st.session_state.answered = False 
+    st.session_state.is_correct = False
 
 def next_question():
     if not st.session_state.queue:
@@ -40,9 +41,11 @@ def next_question():
         st.session_state.current_q = None
     else:
         st.session_state.current_q = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
-    st.session_state.is_wrong_mode = False
+    # 状態リセット
+    st.session_state.answered = False
+    st.session_state.is_correct = False
 
-# 初回起動
+# 初回セットアップ
 if st.session_state.current_q is None and not st.session_state.show_result:
     next_question()
 
@@ -56,13 +59,13 @@ if st.session_state.show_result:
     
     if not st.session_state.wrong_list:
         st.balloons()
-        st.success("🎉 全問マスター！おめでとうございます！")
+        st.success("🎉 全問正解！おめでとうございます！")
         if st.button("最初からやり直す"):
             st.session_state.clear()
             st.rerun()
     else:
-        st.info(f"不正解が {len(st.session_state.wrong_list)} 問あります。")
-        if st.button("次のラウンド（不正解分）へ"):
+        st.info(f"不正解だった {len(st.session_state.wrong_list)} 問に挑戦します。")
+        if st.button("次のラウンドを開始"):
             st.session_state.queue = st.session_state.wrong_list.copy()
             st.session_state.wrong_list = []
             st.session_state.round += 1
@@ -70,39 +73,40 @@ if st.session_state.show_result:
             next_question()
             st.rerun()
 
-# 2. 【不正解確認モード】
-elif st.session_state.is_wrong_mode:
-    q = st.session_state.current_q
-    st.error("× 不正解")
-    st.write(f"### 単語: {q['word']}")
-    st.write(f"### 正解: **{q['meaning']}**")
-    st.write("---")
-    
-    # このボタンを押すまで、画面は絶対に動きません
-    if st.button("確認しました（次の問題へ）"):
-        next_question()
-        st.rerun()
-
-# 3. 【通常出題モード】
+# 2. 【クイズ出題・判定画面】
 else:
     q = st.session_state.current_q
     st.markdown(f"<p class='status-text'>累計正解: {st.session_state.mastered_count} / {st.session_state.total_count}</p>", unsafe_allow_html=True)
-    st.subheader(f"「{q['word']}」の意味は？")
+    st.subheader(f"「{q['word']}」")
 
-    # 選択肢の生成
-    all_meanings = [w['meaning'] for w in st.session_state.words]
-    wrong_options = random.sample([m for m in all_meanings if m != q['meaning']], min(len(all_meanings)-1, 4))
-    options = random.sample(wrong_options + [q['meaning']], len(wrong_options) + 1)
+    # A. まだ回答していない場合：選択肢を表示
+    if not st.session_state.answered:
+        all_meanings = [w['meaning'] for w in st.session_state.words]
+        wrong_options = random.sample([m for m in all_meanings if m != q['meaning']], min(len(all_meanings)-1, 4))
+        options = random.sample(wrong_options + [q['meaning']], len(wrong_options) + 1)
 
-    for opt in options:
-        if st.button(opt, key=f"q{st.session_state.round}_{q['word']}_{opt}"):
-            if opt == q['meaning']:
-                # 正解なら即、次の問題へ（石濱さんの手間を減らすため）
-                st.session_state.mastered_count += 1
-                next_question()
-                st.rerun()
-            else:
-                # 不正解なら確認画面モードへ切り替え
-                st.session_state.wrong_list.append(q)
-                st.session_state.is_wrong_mode = True
-                st.rerun()
+        for opt in options:
+            if st.button(opt, key=f"q{st.session_state.round}_{q['word']}_{opt}"):
+                st.session_state.answered = True
+                if opt == q['meaning']:
+                    st.session_state.mastered_count += 1
+                    st.session_state.is_correct = True
+                    # 正解なら即、次へ進む
+                    next_question()
+                    st.rerun()
+                else:
+                    st.session_state.wrong_list.append(q)
+                    st.session_state.is_correct = False
+                    st.rerun()
+
+    # B. 回答済み（不正解）の場合：判定と意味を表示し、止まる
+    else:
+        # 正解処理はAの中で次へ行くので、ここに来るのは基本的に「不正解」の場合のみ
+        st.error(f"× 不正解！")
+        st.write(f"### 正解： {q['meaning']}")
+        st.write("---")
+        
+        # このボタンを押すまで絶対に画面は変わりません
+        if st.button("確認して次の問題へ"):
+            next_question()
+            st.rerun()

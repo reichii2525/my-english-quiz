@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import random
-import time
 
 # --- ページ設定 ---
 st.set_page_config(page_title="英単語クイズ", layout="centered")
@@ -11,7 +10,6 @@ st.markdown("""
     .block-container { padding-top: 0.5rem; }
     .stButton button { width: 100%; margin-bottom: -15px; padding: 0.5rem; font-size: 1rem; }
     h1 { font-size: 1.2rem !important; }
-    .stAlert { margin-top: 10px; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -32,74 +30,74 @@ if 'words' not in st.session_state:
     st.session_state.round = 1
     st.session_state.show_result = False
     st.session_state.current_q = None
+    st.session_state.is_answered = False # 回答したかどうかのフラグ
+    st.session_state.feedback_type = ""  # "correct" か "wrong" か
 
-# 次の問題を準備する関数
-def prepare_next():
+def next_question():
     if not st.session_state.queue:
         st.session_state.show_result = True
         st.session_state.current_q = None
     else:
         st.session_state.current_q = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
+    # 状態をリセット
+    st.session_state.is_answered = False
 
 if st.session_state.current_q is None and not st.session_state.show_result:
-    prepare_next()
+    next_question()
 
 # --- メイン画面 ---
 st.title(f"英単語クイズ R{st.session_state.round}")
 
+# 結果発表画面
 if st.session_state.show_result:
-    # 累計正答率の計算
     accuracy = (st.session_state.mastered_count / st.session_state.total_count) * 100
-    st.subheader(f"Round {st.session_state.round} 終了")
     st.metric("累計正答率", f"{accuracy:.0f}%")
-    
     if not st.session_state.wrong_list:
         st.balloons()
-        st.success("100%達成！おめでとうございます！")
-        if st.button("最初からやり直す"):
+        st.success("100%達成！")
+        if st.button("最初から"):
             st.session_state.clear()
             st.rerun()
     else:
-        st.write(f"累計正解: {st.session_state.mastered_count} / {st.session_state.total_count}")
         if st.button("次のRound（不正解分）を開始"):
             st.session_state.queue = st.session_state.wrong_list.copy()
             st.session_state.wrong_list = []
             st.session_state.round += 1
             st.session_state.show_result = False
-            prepare_next()
+            next_question()
             st.rerun()
 
+# クイズ出題画面
 else:
     q = st.session_state.current_q
     st.write(f"残り: {len(st.session_state.queue) + 1}問 / 全体正解: {st.session_state.mastered_count}問")
     st.subheader(f"「{q['word']}」")
 
-    all_meanings = [w['meaning'] for w in st.session_state.words]
-    wrong_options = random.sample([m for m in all_meanings if m != q['meaning']], min(len(all_meanings)-1, 4))
-    options = random.sample(wrong_options + [q['meaning']], len(wrong_options) + 1)
+    # 【回答前】選択肢ボタンを表示
+    if not st.session_state.is_answered:
+        all_meanings = [w['meaning'] for w in st.session_state.words]
+        wrong_options = random.sample([m for m in all_meanings if m != q['meaning']], min(len(all_meanings)-1, 4))
+        options = random.sample(wrong_options + [q['meaning']], len(wrong_options) + 1)
 
-    # ボタンを配置するエリア（回答したら消える）
-    placeholder = st.empty()
-    
-    with placeholder.container():
         for opt in options:
             if st.button(opt, key=f"{q['word']}_{opt}"):
-                # 1. 判定を画面に表示
+                st.session_state.is_answered = True
                 if opt == q['meaning']:
-                    st.success("〇 正解！")
                     st.session_state.mastered_count += 1
-                    wait_time = 0.8  # 正解時は少し早めに次へ
+                    st.session_state.feedback_type = "correct"
                 else:
                     st.session_state.wrong_list.append(q)
-                    # ここで「×」と「意味」を確実に出す
-                    st.error(f"× 不正解！ 正解は：{q['meaning']}")
-                    wait_time = 2.5  # 不正解時はしっかり確認できるよう長めに停止
-
-                # 2. 次の問題を「裏で」準備
-                prepare_next()
-                
-                # 3. 指定した時間だけ画面を止めて、判定を見せる
-                time.sleep(wait_time)
-                
-                # 4. 画面をリフレッシュして次の問題へ
+                    st.session_state.feedback_type = "wrong"
                 st.rerun()
+
+    # 【回答後】判定を表示。ここで画面を止めて「次へ」を待つ
+    else:
+        if st.session_state.feedback_type == "correct":
+            st.success("〇 正解！")
+        else:
+            # 不正解なら確実に「×」と「意味」を表示
+            st.error(f"× 不正解！ 正解は：{q['meaning']}")
+            
+        if st.button("次へ進む"):
+            next_question()
+            st.rerun()

@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import random
+import time
 
 # --- ページ設定（スマホ最適化） ---
 st.set_page_config(page_title="英単語クイズ", layout="centered")
@@ -24,14 +25,14 @@ def load_data():
 # セッション状態の初期化
 if 'words' not in st.session_state:
     st.session_state.words = load_data()
-    st.session_state.total_count = len(st.session_state.words)
+    st.session_state.total_count = len(st.session_state.words) # 全体の母数
     st.session_state.queue = st.session_state.words.copy()
     st.session_state.wrong_list = [] 
     st.session_state.mastered_count = 0 
     st.session_state.current_question = None
     st.session_state.round = 1
     st.session_state.show_result = False
-    st.session_state.feedback = None 
+    st.session_state.answer_feedback = None # 〇か×の判定保持用
 
 def next_question():
     if not st.session_state.queue:
@@ -39,7 +40,7 @@ def next_question():
         st.session_state.current_question = None
     else:
         st.session_state.current_question = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
-    st.session_state.feedback = None
+    st.session_state.answer_feedback = None
 
 # --- メイン画面 ---
 st.title(f"英単語クイズ R{st.session_state.round}")
@@ -52,13 +53,14 @@ if st.session_state.show_result:
     
     if not st.session_state.wrong_list:
         st.balloons()
-        st.success(f"100%達成！全{st.session_state.total_count}問マスター！")
+        st.success(f"100%達成！全{st.session_state.total_count}問を完了！")
         if st.button("最初からやり直す"):
             st.session_state.clear()
             st.rerun()
     else:
         st.write(f"累計正解: {st.session_state.mastered_count} / {st.session_state.total_count}")
-        if st.button("間違えた問題（次のラウンド）へ"):
+        st.info(f"不正解だった {len(st.session_state.wrong_list)} 問を次のRoundで出題します。")
+        if st.button("次のRoundへ進む"):
             st.session_state.queue = st.session_state.wrong_list.copy()
             st.session_state.wrong_list = []
             st.session_state.round += 1
@@ -80,23 +82,26 @@ else:
     wrong_options = random.sample([m for m in all_meanings if m != q['meaning']], min(len(all_meanings)-1, 4))
     options = random.sample(wrong_options + [q['meaning']], len(wrong_options) + 1)
 
-    # 判定ボタン
-    if st.session_state.feedback is None:
+    # 判定前：選択肢を表示
+    if st.session_state.answer_feedback is None:
         for opt in options:
             if st.button(opt):
                 if opt == q['meaning']:
                     st.session_state.mastered_count += 1
-                    st.toast("正解！", icon="✅")
-                    next_question()
+                    st.session_state.answer_feedback = "〇 正解！"
                     st.rerun()
                 else:
-                    # 間違えたらリストに入れて、フィードバックを表示する
                     st.session_state.wrong_list.append(q)
-                    st.session_state.feedback = f"× 不正解！ 正解は：{q['meaning']}"
+                    st.session_state.answer_feedback = f"× 不正解！ 正解は：{q['meaning']}"
                     st.rerun()
+    
+    # 判定後：〇か×を表示して「次へ」進む
     else:
-        # ここが重要：間違えた時、やり直しさせずに「次の問題へ」ボタンのみ出す
-        st.error(st.session_state.feedback)
+        if "〇" in st.session_state.answer_feedback:
+            st.success(st.session_state.answer_feedback)
+        else:
+            st.error(st.session_state.answer_feedback)
+            
         if st.button("次の問題へ"):
             next_question()
             st.rerun()

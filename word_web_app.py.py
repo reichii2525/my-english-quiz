@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import random
+import time
 
 # --- ページ設定 ---
 st.set_page_config(page_title="英単語クイズ", layout="centered")
@@ -11,7 +12,6 @@ st.markdown("""
     .stButton button { width: 100%; margin-bottom: -18px; padding: 0.4rem; font-size: 0.9rem; }
     h1 { font-size: 1.1rem !important; margin-bottom: -10px; }
     .stSubheader { font-size: 1.2rem !important; margin-top: -10px; }
-    div[data-testid="stText"] { font-size: 0.8rem; margin-bottom: -15px; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -22,13 +22,12 @@ def load_data():
     df.columns = ['word', 'meaning'] + list(df.columns[2:])
     return df.to_dict('records')
 
-# セッション状態の初期化
 if 'words' not in st.session_state:
     st.session_state.words = load_data()
-    st.session_state.queue = st.session_state.words.copy() # 今回解く問題
-    st.session_state.wrong_list = [] # 今回間違えた問題
-    st.session_state.mastered_count = 0 # 累計正解数
-    st.session_state.total_count = len(st.session_state.words) # 全体の問題数
+    st.session_state.queue = st.session_state.words.copy()
+    st.session_state.wrong_list = []
+    st.session_state.mastered_count = 0
+    st.session_state.total_count = len(st.session_state.words)
     st.session_state.current_question = None
     st.session_state.round = 1
     st.session_state.show_result = False
@@ -36,28 +35,28 @@ if 'words' not in st.session_state:
 def next_question():
     if not st.session_state.queue:
         st.session_state.show_result = True
+        st.session_state.current_question = None
     else:
         st.session_state.current_question = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
 
 # --- メイン画面 ---
 st.title(f"英単語クイズ R{st.session_state.round}")
 
-# ラウンド終了後の結果表示
+# ラウンド終了後の結果表示画面
 if st.session_state.show_result:
-    # 累計の正答率を計算
     accuracy = (st.session_state.mastered_count / st.session_state.total_count) * 100
     st.subheader(f"Round {st.session_state.round} 終了")
     st.metric("現在の総正答率", f"{accuracy:.1f}%")
     
     if not st.session_state.wrong_list:
         st.balloons()
-        st.success(f"全{st.session_state.total_count}問、すべて正解しました！")
+        st.success(f"100%達成！全{st.session_state.total_count}問をマスターしました！")
         if st.button("最初からやり直す"):
             st.session_state.clear()
             st.rerun()
     else:
         st.write(f"残り {len(st.session_state.wrong_list)} 問です。")
-        if st.button("間違えた問題に再挑戦"):
+        if st.button("次のラウンド（不正解問題）へ"):
             st.session_state.queue = st.session_state.wrong_list.copy()
             st.session_state.wrong_list = []
             st.session_state.round += 1
@@ -71,7 +70,7 @@ else:
         next_question()
 
     q = st.session_state.current_question
-    st.write(f"このラウンド: 残り {len(st.session_state.queue) + 1}問 / 全体正解: {st.session_state.mastered_count}問")
+    st.write(f"進捗: {st.session_state.mastered_count} / {st.session_state.total_count}問正解済み")
     st.subheader(f"「{q['word']}」の意味は？")
 
     all_meanings = [w['meaning'] for w in st.session_state.words]
@@ -79,17 +78,17 @@ else:
     options = random.sample(wrong_options + [q['meaning']], len(wrong_options) + 1)
 
     for opt in options:
-        if st.button(opt):
+        if st.button(opt, key=opt):
             if opt == q['meaning']:
                 st.toast("正解！", icon="✅")
                 st.session_state.mastered_count += 1
                 next_question()
                 st.rerun()
             else:
-                st.error(f"正解は「{q['meaning']}」")
+                st.error(f"不正解！ 正解は： {q['meaning']}")
                 if q not in st.session_state.wrong_list:
                     st.session_state.wrong_list.append(q)
-                # 間違えてもすぐに次に進む
-                if st.button("次へ"):
-                    next_question()
-                    st.rerun()
+                # 1.5秒待ってから自動で次の問題へ進む（ここがポイント！）
+                time.sleep(1.5)
+                next_question()
+                st.rerun()

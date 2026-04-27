@@ -3,20 +3,14 @@ import pandas as pd
 import random
 import time
 
-# --- ページ設定（スマホ最適化） ---
+# --- ページ設定 ---
 st.set_page_config(page_title="英単語クイズ", layout="centered")
 
 st.markdown("""
     <style>
     .block-container { padding-top: 0.5rem; padding-bottom: 0rem; }
-    .stButton button { 
-        width: 100%; 
-        margin-bottom: -18px; 
-        padding: 0.5rem; 
-        font-size: 1rem;
-    }
+    .stButton button { width: 100%; margin-bottom: -18px; padding: 0.5rem; font-size: 1rem; }
     h1 { font-size: 1.1rem !important; margin-bottom: -10px; }
-    .stSubheader { font-size: 1.3rem !important; margin-top: -5px; color: #31333F; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -27,22 +21,29 @@ def load_data():
     df.columns = ['word', 'meaning'] + list(df.columns[2:])
     return df.to_dict('records')
 
+# セッション状態の初期化
 if 'words' not in st.session_state:
     st.session_state.words = load_data()
     st.session_state.total_count = len(st.session_state.words)
     st.session_state.queue = st.session_state.words.copy()
     st.session_state.wrong_list = []
     st.session_state.mastered_count = 0
-    st.session_state.current_question = None
     st.session_state.round = 1
     st.session_state.show_result = False
+    # 現在の問題を保持
+    st.session_state.current_q = None
 
-def next_question():
+# 次の問題を準備する関数（ここを強化しました）
+def prepare_next():
     if not st.session_state.queue:
         st.session_state.show_result = True
-        st.session_state.current_question = None
+        st.session_state.current_q = None
     else:
-        st.session_state.current_question = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
+        st.session_state.current_q = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
+
+# 最初の1問目をセット
+if st.session_state.current_q is None and not st.session_state.show_result:
+    prepare_next()
 
 # --- メイン画面 ---
 st.title(f"英単語クイズ R{st.session_state.round}")
@@ -54,27 +55,23 @@ if st.session_state.show_result:
     
     if not st.session_state.wrong_list:
         st.balloons()
-        st.success("100%達成！素晴らしいです！")
+        st.success("100%達成！")
         if st.button("最初からやり直す"):
             st.session_state.clear()
             st.rerun()
     else:
         st.write(f"累計正解: {st.session_state.mastered_count} / {st.session_state.total_count}")
-        st.info(f"不正解だった {len(st.session_state.wrong_list)} 問を次のラウンドで出題します。")
         if st.button("次のラウンドを開始"):
             st.session_state.queue = st.session_state.wrong_list.copy()
             st.session_state.wrong_list = []
             st.session_state.round += 1
             st.session_state.show_result = False
-            next_question()
+            prepare_next()
             st.rerun()
 
 else:
-    if st.session_state.current_question is None:
-        next_question()
-
-    q = st.session_state.current_question
-    st.write(f"残り: {len(st.session_state.queue) + 1}問 / 累計正解: {st.session_state.mastered_count}問")
+    q = st.session_state.current_q
+    st.write(f"残り: {len(st.session_state.queue) + 1}問 / 全体正解: {st.session_state.mastered_count}問")
     st.subheader(f"「{q['word']}」")
 
     # 選択肢の生成
@@ -82,19 +79,24 @@ else:
     wrong_options = random.sample([m for m in all_meanings if m != q['meaning']], min(len(all_meanings)-1, 4))
     options = random.sample(wrong_options + [q['meaning']], len(wrong_options) + 1)
 
-    # ボタンをクリックした瞬間に判定
-    for opt in options:
-        if st.button(opt, key=f"btn_{opt}"):
-            if opt == q['meaning']:
-                st.success("〇 正解！")
-                st.session_state.mastered_count += 1
-                # 正解時は一瞬（0.5秒）だけ表示して次へ
-                time.sleep(0.5)
-            else:
-                st.session_state.wrong_list.append(q)
-                st.error(f"× 不正解！ 正解は：{q['meaning']}")
-                # 不正解時はしっかり確認できるよう1.5秒待ってから次へ
-                time.sleep(1.5)
-            
-            next_question()
-            st.rerun()
+    # プレースホルダーを作って、ボタンを押した後に中身を書き換える
+    container = st.empty()
+    
+    # 選択肢ボタンを表示
+    with container.container():
+        for opt in options:
+            if st.button(opt, key=f"{q['word']}_{opt}"):
+                # ボタンが押された瞬間に判定を表示
+                if opt == q['meaning']:
+                    st.success("〇 正解！")
+                    st.session_state.mastered_count += 1
+                    wait_time = 0.6
+                else:
+                    st.session_state.wrong_list.append(q)
+                    st.error(f"× 不正解！ 正解は：{q['meaning']}")
+                    wait_time = 1.8
+                
+                # ここで次の問題を準備（現在の q を上書き）
+                prepare_next()
+                time.sleep(wait_time)
+                st.rerun()

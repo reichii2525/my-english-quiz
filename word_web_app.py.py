@@ -2,13 +2,13 @@ import streamlit as st
 import pandas as pd
 import random
 
-# --- ページ設定（スマホ最適化） ---
+# --- ページ設定 ---
 st.set_page_config(page_title="英単語クイズ", layout="centered")
 
 st.markdown("""
     <style>
     .block-container { padding-top: 0.5rem; }
-    .stButton button { width: 100%; margin-bottom: -15px; padding: 0.5rem; font-size: 1rem; }
+    .stButton button { width: 100%; margin-bottom: -15px; padding: 0.6rem; font-size: 1rem; }
     h1 { font-size: 1.2rem !important; }
     </style>
     """, unsafe_allow_html=True)
@@ -30,7 +30,7 @@ if 'words' not in st.session_state:
     st.session_state.round = 1
     st.session_state.show_result = False
     st.session_state.current_q = None
-    st.session_state.is_wrong_answer = False # 不正解の時だけ止まるためのフラグ
+    st.session_state.is_wrong_mode = False # 不正解画面を表示中か
 
 def next_question():
     if not st.session_state.queue:
@@ -38,7 +38,7 @@ def next_question():
         st.session_state.current_q = None
     else:
         st.session_state.current_q = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
-    st.session_state.is_wrong_answer = False
+    st.session_state.is_wrong_mode = False
 
 if st.session_state.current_q is None and not st.session_state.show_result:
     next_question()
@@ -46,12 +46,13 @@ if st.session_state.current_q is None and not st.session_state.show_result:
 # --- メイン画面 ---
 st.title(f"英単語クイズ R{st.session_state.round}")
 
+# 1. ラウンド終了後の結果表示
 if st.session_state.show_result:
     accuracy = (st.session_state.mastered_count / st.session_state.total_count) * 100
     st.metric("累計正答率", f"{accuracy:.0f}%")
     if not st.session_state.wrong_list:
         st.balloons()
-        st.success("100%達成！おめでとうございます！")
+        st.success("100%達成！")
         if st.button("最初から"):
             st.session_state.clear()
             st.rerun()
@@ -64,33 +65,36 @@ if st.session_state.show_result:
             next_question()
             st.rerun()
 
+# 2. 【不正解時】×と意味を表示する専用画面
+elif st.session_state.is_wrong_mode:
+    q = st.session_state.current_q
+    st.error(f"× 不正解！")
+    st.subheader(f"「{q['word']}」の正解は...")
+    st.info(f"👉 {q['meaning']}")
+    
+    if st.button("確認して次の問題へ"):
+        next_question()
+        st.rerun()
+
+# 3. 【クイズ出題中】
 else:
     q = st.session_state.current_q
     st.write(f"残り: {len(st.session_state.queue) + 1}問 / 全体正解: {st.session_state.mastered_count}問")
-    st.subheader(f"「{q['word']}」")
+    st.subheader(f"「{q['word']}」の意味は？")
 
-    # 【通常時】選択肢を表示
-    if not st.session_state.is_wrong_answer:
-        all_meanings = [w['meaning'] for w in st.session_state.words]
-        wrong_options = random.sample([m for m in all_meanings if m != q['meaning']], min(len(all_meanings)-1, 4))
-        options = random.sample(wrong_options + [q['meaning']], len(wrong_options) + 1)
+    all_meanings = [w['meaning'] for w in st.session_state.words]
+    wrong_options = random.sample([m for m in all_meanings if m != q['meaning']], min(len(all_meanings)-1, 4))
+    options = random.sample(wrong_options + [q['meaning']], len(wrong_options) + 1)
 
-        for opt in options:
-            if st.button(opt, key=f"{q['word']}_{opt}"):
-                if opt == q['meaning']:
-                    # --- 正解の場合：そのまま次の問題へ ---
-                    st.session_state.mastered_count += 1
-                    next_question()
-                    st.rerun()
-                else:
-                    # --- 不正解の場合：フラグを立てて画面を止める ---
-                    st.session_state.wrong_list.append(q)
-                    st.session_state.is_wrong_answer = True
-                    st.rerun()
-
-    # 【不正解時】判定を表示し、「次へ」を待つ
-    else:
-        st.error(f"× 不正解！ 正解は：{q['meaning']}")
-        if st.button("次の問題へ"):
-            next_question()
-            st.rerun()
+    for opt in options:
+        if st.button(opt, key=f"{q['word']}_{opt}"):
+            if opt == q['meaning']:
+                # 正解なら自動で即、次の問題へ
+                st.session_state.mastered_count += 1
+                next_question()
+                st.rerun()
+            else:
+                # 不正解なら専用画面フラグを立てる
+                st.session_state.wrong_list.append(q)
+                st.session_state.is_wrong_mode = True
+                st.rerun()

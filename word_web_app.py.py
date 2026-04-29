@@ -32,20 +32,23 @@ if 'words' not in st.session_state:
     st.session_state.show_result = False
     st.session_state.current_q = None
 
-def next_question():
+# 問題を切り替える関数（ここを強化しました）
+def move_to_next():
     if not st.session_state.queue:
         st.session_state.show_result = True
         st.session_state.current_q = None
     else:
+        # ランダムに一問取り出し、現在の問題にセット
         st.session_state.current_q = st.session_state.queue.pop(random.randrange(len(st.session_state.queue)))
 
+# 初回起動時のみ実行
 if st.session_state.current_q is None and not st.session_state.show_result:
-    next_question()
+    move_to_next()
 
 # --- メイン画面 ---
 st.title(f"英単語クイズ Round {st.session_state.round}")
 
-# 1. 【リザルト画面】
+# 1. 【結果画面：全問解き終わった後】
 if st.session_state.show_result:
     accuracy = (st.session_state.mastered_count / st.session_state.total_count) * 100
     st.subheader(f"Round {st.session_state.round} 終了")
@@ -59,15 +62,16 @@ if st.session_state.show_result:
             st.rerun()
     else:
         st.info(f"不正解だった {len(st.session_state.wrong_list)} 問を次のラウンドで出題します。")
-        if st.button("次のラウンドを開始"):
+        if st.button("次のラウンド（不正解のみ）を開始"):
+            # 不正解リストを次のキューに入れ替え
             st.session_state.queue = st.session_state.wrong_list.copy()
             st.session_state.wrong_list = []
             st.session_state.round += 1
             st.session_state.show_result = False
-            next_question()
+            move_to_next()
             st.rerun()
 
-# 2. 【クイズ画面】
+# 2. 【クイズ画面：出題中】
 else:
     q = st.session_state.current_q
     st.markdown(f"<div class='status-text'>残り: {len(st.session_state.queue) + 1}問 / 全体正解: {st.session_state.mastered_count}問</div>", unsafe_allow_html=True)
@@ -78,26 +82,21 @@ else:
     wrong_options = random.sample([m for m in all_meanings if m != q['meaning']], min(len(all_meanings)-1, 4))
     options = random.sample(wrong_options + [q['meaning']], len(wrong_options) + 1)
 
-    # ボタンを配置するプレースホルダー
-    placeholder = st.empty()
-    
-    with placeholder.container():
-        for opt in options:
-            if st.button(opt, key=f"r{st.session_state.round}_{q['word']}_{opt}"):
-                if opt == q['meaning']:
-                    # --- 【正解】 ---
-                    st.success("〇 正解！")
-                    st.session_state.mastered_count += 1
-                    # 正解は一瞬（0.3秒）で次へ
-                    time.sleep(0.3)
-                    next_question()
-                    st.rerun()
-                else:
-                    # --- 【不正解】 ---
-                    st.session_state.wrong_list.append(q)
-                    # 赤い枠で正解を表示
-                    st.error(f"× 不正解！ 正解は：{q['meaning']}")
-                    # ここで3秒間停止。石濱さんが正解を確認できるようにします。
-                    time.sleep(3.0)
-                    next_question()
-                    st.rerun()
+    # 選択肢を表示
+    for opt in options:
+        # キーに単語名を含めることで、次の問題へ移った時にボタンの状態をリセット
+        if st.button(opt, key=f"r{st.session_state.round}_{q['word']}_{opt}"):
+            if opt == q['meaning']:
+                # --- 正解時 ---
+                st.success("〇 正解！")
+                st.session_state.mastered_count += 1
+                time.sleep(0.3) # テンポよく次へ
+            else:
+                # --- 不正解時 ---
+                st.session_state.wrong_list.append(q)
+                st.error(f"× 不正解！ 正解は：{q['meaning']}")
+                time.sleep(3.0) # 正解を確認するための時間
+            
+            # **ここがポイント：正解・不正解どちらでも必ず次に進める**
+            move_to_next()
+            st.rerun()

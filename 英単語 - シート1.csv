@@ -3,6 +3,7 @@ evaluate,評価する
 ridiculous,ばかばかしい
 convince,納得させる
 convincing,説得力のある
+acting,演技
 argument,主張
 predictable,予測可能な
 confusing,紛らわしい
@@ -11,51 +12,170 @@ engrossed,夢中になる
 absorbed,心を奪われた
 baffled,困惑した
 dissuading,思いとどまらせる
+not make any difference,何の違いも生じない
+not do any good,効果がない
+course of action,一連の行動
 solve,解決する
 tussle,格闘する
+"blood, sweat, and tear",血と汗と涙の努力
+a household name,誰もが知っている名前
+a red-letter day,記念すべき日
+occasion,機会
+exploration,探索
+no mean feat,大変な偉業
 culmination,集大成
+currency,通貨
+rivalry,競争
+decades,数十年
+tug of war,綱引き
+a feather in (one's) cap,勲章
+unsung hero,縁の下の力持ち
+wipe out,全滅させる
+get underway,始まる
 be on the safe side,念のため
+be around,その辺にいる
 infectious,感染性のある
+disease,病気
+cause,原因
 paralysis,麻痺
 crippled,不自由な
+exist,存在する
+millennia,千年
+vaccination,予防接種
 eradicate,根絶する
+get rid of,取り除く
+oral,口頭の
+vaccine,ワクチン
 administer,管理する
 precaution,予防対策
+preparation,準備
+hallway,廊下
+attend,出席する
+attend to,世話をする
+attendant,接客係
+attendance,出席
 available,利用可能な
+due,期限で
+retail,小売り
+handout,配布資料
 indeed,確かに
+pick up,覚える
+get into,身に付く
+have a go at,試しにやってみる
+take up,始める
+get back into,～に戻る
+get into the habit of,習慣が身に付く
+keep up,～し続ける
+lose interest in,興味を失う
+take (it) seriously,真剣に受け止める
+build up,鍛え上げる
+get out of practice,練習から遠ざかる
+stay at (it),留まる
+wouldn't mind -ing,～するのも悪くない
+habit,癖
+provide,提供する
 rough,激しい
+head up to,〜に向かう
+opportunity,機会
+stuff,もの
+indicate,示す
+fascinating,魅力的な
+wildlife,野生動物
 afford,与える
 interact,交流する
+kick back,くつろぐ
+waste,無駄
+take my time,ゆっくり時間をかける
+payroll,給与計算
+expenses,経理
+that reminds me,それで思い出した
+relief,安心
+It’ll be just our luck,ツイてない
 torrential,激しい
+thick,厚い
+gale,強風
+coastal,沿岸
+put up,飾る
+require,必要とする
+I reckon～,～じゃないかな
+I know what you mean,そうだよね
 imply,意味する
 decent,ちゃんとした
 depressing,気が滅入る
+faucet,蛇口
+I'm afraid,あいにくですが
+back then,あの頃
+basin,洗面器
+frequency,頻度
+elementary,初歩の
+double-decker,二階建てバス
 make it,間に合う
 grounded,運航・離陸停止の
+until further notice,追ってお知らせがあるまで
+manage to,なんとかする
+currently,現在
 specifying,特定する、詳しく述べる
 narrow　down to,〜に絞り込む
 applicant,応募者
 candidates,候補者
 qualifications,資格
+attendance record,勤怠記録
+loyal,誠実な
+ambitious,意欲的な
+flexible,柔軟性がある
+inflexible,柔軟性がない
 confident,自信のある
 decisive,決断力のある
+indecisive,決断力のない
+positive,前向きな
+shortlist,候補者名簿
 hesitant,ためらっている
 speculate,推測する
 Typical!,やっぱりね、またか
 references,参照
 omit,省略、漏らす
 omission,抜け漏れ
+justifying,正当化する
 reluctance,気が進まない
+I'd rather not,遠慮しておきます
+cost me a fortune,大金がかかった
 hang on,ちょっと待って
+avoid,避ける
+blame,非難する
+fold,畳む
+leave out,除外する
+realize,気づく
+major in,専攻
 pharmaceutical,製薬
+forecast,予測
 assign,割り当てる
 relevant to,～に関連する
+keen,熱心な
+viewers,"視聴者
+"
 protest,抗議
+destroy,破壊する
+surely,きっと
 investment,投資
+boost,高める
+pie chart,円グラフ
 improve,改善する
+increase,増加
 attract,引きつける
+transport,輸送
 unbearable,耐えられない
 affect,影響する
+provide jobs,雇用供給
+boost investment in the area,地域内での投資増加
+attract new business,新規事業の誘致
+area will become a transport hub,地域が流通拠点となる
+provide new services and facilities,新規サービスや設備の供給
+cause pollution,公害を引き起こす
+noise will be unbearable,耐え難い騒音
+increase in traffic accidents,交通事故の増加
+affect the way of life here,生活様式への影響
+kill off downtown business,商業地区でのビジネスを潰す
+protesters,抗議活動参加者
 councilor,評議員
 concern,懸念
 council,評議会
@@ -63,17 +183,23 @@ oppose,反対する
 mediate,仲介する
 dialogue,対話
 current,現在
+deadlock,行き詰まり
 supportive,協力的な
 incredibly,信じられないほど
 disaster,災害
 consequence,結果
+discuss,話し合う
 admit,認める
 pretend,演じる
 assume,仮定する
+pushed for time,時間に追われている
 attic,屋根裏
 decline,お断り
 precise,"正確な
 "
+steer clear of ~,〜を避ける
+What’s eating you,何が不満なの？
+down in the dumps,ひどく落ち込んでいる
 upset,怒り、落ち込み、悩み、ひどい落胆
 rotten,腐った
 bizarre,奇妙な
@@ -81,35 +207,64 @@ creeps,ゾッとする、薄気味悪い
 persuasively,説得力をもって
 persuade,説得する
 deny,拒否する
+It speaks for itself,一目瞭然だ
+without a doubt,間違いなく
+storage,保管・貯蔵
 particular,特定の
 hardly,しそうにない
 hardly any,ほとんど～ない
+residential,居住地の
+rural,いなかの
+suburban,郊外の
+downtown,商業地区の
+commercial,商業の
 participate,参加する
 spear,槍
+plenty of,十分な
+stunning,見事な
 regret,後悔する
 fail,失敗する
 I'll bet～,きっと～だだ
 ruined,台無しにされた
+confirm,確認する
 implicit,暗黙の
 brochure,パンフレット
+"First come, first served basis",先着順
+entire,全体
+annoyed,イライラした
+That explains why,それで説明がつく
+extremely,非常に
+calm,穏やかな
 anxious,心配した
 embarrassed,恥ずかしい
+surprised,驚いた
 depressed,意気消沈した
+stressed,ストレスのある
 furious,怒り狂った
 frightened,おびえた
 relieved,ほっとした
 mess,混乱、乱雑
 occasion,行事
+suggestion,提案
+scenic,景色のよい
 appreciate,感謝する
 mention,言及
 contract,契約
 evaluation,評価
 organize,整理する
+too little eye contact,あまり目を合わせない
+giving vague answers,あいまいな返事をする
 fidgeting,そわそわする
+repeatedly touching (his) nose,繰り返し鼻をさわる
+pursing (his) lips,唇をすぼめる
+"saying ""err"" and ""erm""",「あ～」、「え～」、などと言う
+looking at the ground,地面を見つめる
+shrugging (her) shoulders,肩をすくめる
 suspicion,疑い
 suspicious,疑わしい
 excuse,言い訳
 figure,思う
+assistance,援助
 attribute,属性
 individual,個人
 endurance,持久力
@@ -117,6 +272,9 @@ determination,決断力
 strategy,戦略
 physical strength,体力
 discipline,鍛錬
+self-control,自制心
+balance,バランス
+stamina,スタミナ
 aggression,攻撃
 concentration,集中力
 reflexes,反射神経
@@ -133,16 +291,24 @@ frequent,頻繁
 tiny,小さい
 proposal,提案
 quite,とても
+tree pruning,樹木の剪定
+home tutor,家庭教師
 actual,実際の
 competition,競争、競合
+make a go of it,うまくやる、成功させる
 embed,埋め込む
 custom,習慣
 chase,追う、追跡
 steep,急な
 bull,雄牛
+bullfighting,闘牛
 mistletoe,ヤドリギ
+pull a prank on,～にいたずらをする
+practical joke,悪ふざけ
 practical,実用的な
 impressed,感動した
+budget,予算
+udget model,廉価モデル
 initial,初期
 hoax,でっち上げ
 sighting,目撃
@@ -168,3 +334,15 @@ dent,凹み
 inevitability,必然性
 intersection,交差点
 end up in,結局のところ
+expectation,期待
+furnished,家具付き
+narrow,狭い
+What's through here？,ここを抜けた先には何があるの？
+in the way,邪魔になって
+set off,出発する
+respond,応答する
+reluctantly,しぶしぶ
+suppose,仮定する
+clumsy,不器用な
+In the foreground,前方に
+In the background,後方に

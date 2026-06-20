@@ -1,378 +1,236 @@
-単語,意味,
-evaluate,評価する,
-ridiculous,ばかばかしい,
-convince,納得させる,
-convincing,説得力のある,
-acting,演技,1
-argument,主張,
-predictable,予測可能な,
-confusing,紛らわしい,
-repululsed,ぞっとする,
-engrossed,夢中になる,
-absorbed,心を奪われた,
-baffled,困惑した,
-dissuading,思いとどまらせる,
-not make any difference,何の違いも生じない,1
-not do any good,効果がない,1
-course of action,一連の行動,1
-solve,解決する,
-tussle,格闘する,
-"blood, sweat, and tear",血と汗と涙の努力,1
-a household name,誰もが知っている名前,1
-a red-letter day,記念すべき日,1
-occasion,機会,1
-exploration,探索,1
-no mean feat,大変な偉業,1
-culmination,集大成,
-currency,通貨,1
-rivalry,競争,1
-decades,数十年,1
-tug of war,綱引き,1
-a feather in (one's) cap,勲章,1
-unsung hero,縁の下の力持ち,1
-wipe out,全滅させる,1
-get underway,始まる,1
-be on the safe side,念のため,
-be around,その辺にいる,1
-infectious,感染性のある,
-disease,病気,1
-cause,原因,1
-paralysis,麻痺,
-crippled,不自由な,
-exist,存在する,1
-millennia,千年,1
-vaccination,予防接種,1
-eradicate,根絶する,
-get rid of,取り除く,1
-oral,口頭の,1
-vaccine,ワクチン,1
-administer,管理する,
-precaution,予防対策,
-preparation,準備,1
-hallway,廊下,1
-attend,出席する,1
-attend to,世話をする,1
-attendant,接客係,1
-attendance,出席,1
-available,利用可能な,
-due,期限で,1
-retail,小売り,1
-handout,配布資料,1
-indeed,確かに,
-pick up,覚える,1
-get into,身に付く,1
-have a go at,試しにやってみる,1
-take up,始める,1
-get back into,～に戻る,1
-get into the habit of,習慣が身に付く,1
-keep up,～し続ける、対応する,1
-lose interest in,興味を失う,1
-take (it) seriously,真剣に受け止める,1
-build up,鍛え上げる,1
-get out of practice,練習から遠ざかる,1
-stay at (it),留まる,1
-wouldn't mind -ing,～するのも悪くない,1
-habit,癖,1
-provide,提供する,1
-rough,激しい,
-head up to,〜に向かう,1
-opportunity,機会,1
-stuff,もの,1
-indicate,示す,1
-fascinating,魅力的な,1
-wildlife,野生動物,1
-afford,与える,
-interact,交流する,
-kick back,くつろぐ,1
-waste,無駄,1
-take my time,ゆっくり時間をかける,1
-payroll,給与計算,1
-expenses,経理,1
-that reminds me,それで思い出した,1
-relief,安心,1
-It’ll be just our luck,ツイてない,1
-torrential,激しい,
-thick,厚い,1
-gale,強風,1
-coastal,沿岸,1
-put up,飾る,1
-require,必要とする,1
-I reckon～,～じゃないかな,1
-I know what you mean,そうだよね,1
-imply,意味する,
-decent,ちゃんとした,
-depressing,気が滅入る,
-faucet,蛇口,1
-I'm afraid,あいにくですが,1
-back then,あの頃,1
-basin,洗面器,1
-frequency,頻度,1
-elementary,初歩の,1
-double-decker,二階建てバス,1
-make it,間に合う,
-grounded,運航・離陸停止の,
-until further notice,追ってお知らせがあるまで,1
-manage to,なんとかする,1
-currently,現在,1
-specifying,特定する、詳しく述べる,
-narrow　down to,〜に絞り込む,
-applicant,応募者,
-candidates,候補者,
-qualifications,資格,
-attendance record,勤怠記録,1
-loyal,誠実な,1
-ambitious,意欲的な,1
-flexible,柔軟性がある,1
-inflexible,柔軟性がない,1
-confident,自信のある,
-decisive,決断力のある,
-indecisive,決断力のない,1
-positive,前向きな,1
-shortlist,候補者名簿,1
-hesitant,ためらっている,
-speculate,推測する,
-Typical!,やっぱりね、またか,
-references,参照,
-omit,省略、漏らす,
-omission,抜け漏れ,
-justifying,正当化する,1
-reluctance,気が進まない,
-I'd rather not,遠慮しておきます,1
-cost me a fortune,大金がかかった,1
-hang on,ちょっと待って,
-avoid,避ける,1
-blame,非難する,1
-fold,畳む,1
-leave out,除外する,1
-realize,気づく,1
-major in,専攻,1
-pharmaceutical,製薬,
-forecast,予測,1
-assign,割り当てる,
-relevant to,～に関連する,
-keen,熱心な,1
-viewers,"視聴者
-",1
-protest,抗議,
-destroy,破壊する,1
-surely,きっと,1
-investment,投資,
-boost,高める,1
-pie chart,円グラフ,1
-improve,改善する,
-increase,増加,1
-attract,引きつける,
-transport,輸送,1
-unbearable,耐えられない,
-affect,影響する,
-provide jobs,雇用供給,1
-boost investment in the area,地域内での投資増加,1
-attract new business,新規事業の誘致,1
-area will become a transport hub,地域が流通拠点となる,1
-provide new services and facilities,新規サービスや設備の供給,1
-cause pollution,公害を引き起こす,1
-noise will be unbearable,耐え難い騒音,1
-increase in traffic accidents,交通事故の増加,1
-affect the way of life here,生活様式への影響,1
-kill off downtown business,商業地区でのビジネスを潰す,1
-protesters,抗議活動参加者,1
-councilor,評議員,
-concern,懸念,
-council,評議会,
-oppose,反対する,
-mediate,仲介する,
-dialogue,対話,
-current,現在,
-deadlock,行き詰まり,1
-supportive,協力的な,
-incredibly,信じられないほど,
-disaster,災害,
-consequence,結果,
-discuss,話し合う,1
-admit,認める,
-pretend,演じる,
-assume,仮定する,
-pushed for time,時間に追われている,1
-attic,屋根裏,
-decline,お断り,
+単語,意味
+evaluate,評価する
+ridiculous,ばかばかしい
+convince,納得させる
+convincing,説得力のある
+argument,主張
+predictable,予測可能な
+confusing,紛らわしい
+repululsed,ぞっとする
+engrossed,夢中になる
+absorbed,心を奪われた
+baffled,困惑した
+dissuading,思いとどまらせる
+solve,解決する
+tussle,格闘する
+culmination,集大成
+be on the safe side,念のため
+infectious,感染性のある
+paralysis,麻痺
+crippled,不自由な
+eradicate,根絶する
+administer,管理する
+precaution,予防対策
+available,利用可能な
+indeed,確かに
+rough,激しい
+afford,与える
+interact,交流する
+torrential,激しい
+imply,意味する
+decent,ちゃんとした
+depressing,気が滅入る
+make it,間に合う
+grounded,運航・離陸停止の
+specifying,特定する、詳しく述べる
+narrow　down to,〜に絞り込む
+applicant,応募者
+candidates,候補者
+qualifications,資格
+confident,自信のある
+decisive,決断力のある
+hesitant,ためらっている
+speculate,推測する
+Typical!,やっぱりね、またか
+omission,抜け漏れ
+reluctance,気が進まない
+hang on,ちょっと待って
+assign,割り当てる
+relevant to,～に関連する
+protest,抗議
+investment,投資
+improve,改善する
+attract,引きつける
+unbearable,耐えられない
+affect,影響する
+councilor,評議員
+concern,懸念
+council,評議会
+oppose,反対する
+mediate,仲介する
+dialogue,対話
+supportive,協力的な
+incredibly,信じられないほど
+disaster,災害
+consequence,結果
+admit,認める
+pretend,演じる
+assume,仮定する
+decline,お断り
 precise,"正確な
-",
-steer clear of ~,〜を避ける,1
-What’s eating you,何が不満なの？,1
-down in the dumps,ひどく落ち込んでいる,1
-upset,怒り、落ち込み、悩み、ひどい落胆,
-rotten,腐った,
-bizarre,奇妙な,
-creeps,ゾッとする、薄気味悪い,
-persuasively,説得力をもって,
-persuade,説得する,
-deny,拒否する,
-It speaks for itself,一目瞭然だ,1
-without a doubt,間違いなく,1
-storage,保管・貯蔵,1
-particular,特定の,
-hardly,しそうにない,
-hardly any,ほとんど～ない,
-residential,居住地の,1
-rural,いなかの,1
-suburban,郊外の,1
-downtown,商業地区の,1
-commercial,商業の,1
-participate,参加する,
-spear,槍,
-plenty of,十分な,1
-stunning,見事な,1
-regret,後悔する,
-fail,失敗する,
-I'll bet～,きっと～だだ,
-ruined,台無しにされた,
-confirm,確認する,1
-implicit,暗黙の,
-brochure,パンフレット,
-"First come, first served basis",先着順,1
-entire,全体,1
-annoyed,イライラした,1
-That explains why,それで説明がつく,1
-extremely,非常に,1
-calm,穏やかな,1
-anxious,心配した,
-embarrassed,恥ずかしい,
-surprised,驚いた,1
-depressed,意気消沈した,
-stressed,ストレスのある,1
-furious,怒り狂った,
-frightened,おびえた,
-relieved,ほっとした,
-mess,混乱、乱雑,
-occasion,行事,
-suggestion,提案,1
-scenic,景色のよい,1
-appreciate,感謝する,
-mention,言及,
-contract,契約,
-evaluation,評価,
-organize,整理する,
-too little eye contact,あまり目を合わせない,1
-giving vague answers,あいまいな返事をする,1
-fidgeting,そわそわする,
-repeatedly touching (his) nose,繰り返し鼻をさわる,1
-pursing (his) lips,唇をすぼめる,1
-"saying ""err"" and ""erm""",「あ～」、「え～」、などと言う,1
-looking at the ground,地面を見つめる,1
-shrugging (her) shoulders,肩をすくめる,1
-suspicion,疑い,
-suspicious,疑わしい,
-excuse,言い訳,
-figure,思う,
-assistance,援助,1
-attribute,属性,
-individual,個人,
-endurance,持久力,
-determination,決断力,
-strategy,戦略,
-physical strength,体力,
-discipline,鍛錬,
-self-control,自制心,1
-balance,バランス,1
-stamina,スタミナ,1
-aggression,攻撃,
-concentration,集中力,
-reflexes,反射神経,
-demanding,きつい,
-steady,安定した,
-brute,野蛮な,
-coordination,調整,
-essential,不可欠,
-emphasizing,強調する,
-misconception,誤解,
-appropriate,適切な,
-crime,犯罪,
-frequent,頻繁,
-tiny,小さい,
-proposal,提案,
-quite,とても,
-tree pruning,樹木の剪定,1
-home tutor,家庭教師,1
-actual,実際の,
-competition,競争、競合,
-make a go of it,うまくやる、成功させる,1
-embed,埋め込む,
-custom,習慣,
-chase,追う、追跡,
-steep,急な,
-bull,雄牛,
-bullfighting,闘牛,1
-mistletoe,ヤドリギ,
-pull a prank on,～にいたずらをする,1
-practical joke,悪ふざけ,1
-practical,実用的な,
-impressed,感動した,
-budget,予算,1
-udget model,廉価モデル,1
-initial,初期,
-hoax,でっち上げ,
-sighting,目撃,
-genuine,本物,
-proof,証明,
-eyewitness,目撃者,
-footage,監視カメラ,
-passerby,通行人,
-incident,事件,
-deal,"取引",
-encourage,奨励する,
-take a stroll,散歩する,
-Just one more day to go,あと1日残すのみ,
-sit around,ダラダラする,
-get the hang of,コツを掴む,
-specify,特定,
-precede,先行する、前に置く,
-probability,確率,
-prediction,予測,
-cavity,虫歯,
-rash,発疹,
-dent,凹み,
-inevitability,必然性,
-intersection,交差点,
-end up in,結局のところ,
-expectation,期待,
-furnished,家具付き,
-narrow,狭い,
-What's through here？,ここを抜けた先には何があるの？,
-in the way,邪魔になって,
-set off,出発する,
-respond,応答する,
-reluctantly,しぶしぶ,
-suppose,仮定する,
-clumsy,不器用な,
-In the foreground,前方に,
-In the background,後方に,
-despite,にもかかわらず,
-gadget,機器,
-cramped,窮屈な,
-delighted,喜んだ,
-be dedicated to,〜に専念している,
-typical,典型的な,
-invest in,奮発して買う,
-focused,集中した,
-awareness,意識,
-needn't have bothered,わざわざそんなことする必要がなかった,
-silly,ばかな,
-ended up ~ing,結局～することになった,
-distractor,不正解の選択肢,
-encourage,奨励する,
-deprived,貧困層,
-supply A with B,AにBを供給する,
-reunite,再会させる,
-split up,離れ離れにする,
-inquirie,問い合わせ,
-temperamental,気まぐれな,
-typical,典型的な,
-robbery,強盗,
-hostage,人質,
-fingerprint,指紋,
-getaway,逃走,
-gold bullion,金塊,
-go off,作動する、キレる、腐る,
-warranty,保証,
-binoculars,双眼鏡,
-camcorder,ビデオカメラ,
+"
+upset,怒り、落ち込み、悩み、ひどい落胆
+bizarre,奇妙な
+creeps,ゾッとする、薄気味悪い
+persuasively,説得力をもって
+persuade,説得する
+deny,拒否する
+particular,特定の
+hardly,しそうにない
+hardly any,ほとんど～ない
+participate,参加する
+regret,後悔する
+fail,失敗する
+ruined,台無しにされた
+implicit,暗黙の
+anxious,心配した
+embarrassed,恥ずかしい
+depressed,意気消沈した
+furious,怒り狂った
+frightened,おびえた
+relieved,ほっとした
+mess,混乱、乱雑
+occasion,行事
+appreciate,感謝する
+mention,言及
+contract,契約
+evaluation,評価
+organize,整理する
+fidgeting,そわそわする
+suspicion,疑い
+suspicious,疑わしい
+excuse,言い訳
+figure,思う
+attribute,属性
+individual,個人
+endurance,持久力
+determination,決断力
+strategy,戦略
+physical strength,体力
+discipline,鍛錬
+aggression,攻撃
+concentration,集中力
+reflexes,反射神経
+demanding,きつい
+steady,安定した
+brute,野蛮な
+coordination,調整
+essential,不可欠
+emphasizing,強調する
+misconception,誤解
+appropriate,適切な
+crime,犯罪
+frequent,頻繁
+proposal,提案
+quite,とても
+actual,実際の
+competition,競争、競合
+embed,埋め込む
+custom,習慣
+chase,追う、追跡
+steep,急な
+mistletoe,ヤドリギ
+practical,実用的な
+impressed,感動した
+initial,初期
+hoax,でっち上げ
+sighting,目撃
+genuine,本物
+proof,証明
+eyewitness,目撃者
+footage,監視カメラ
+passerby,通行人
+incident,事件
+deal,"取引"
+encourage,奨励する
+take a stroll,散歩する
+sit around,ダラダラする
+get the hang of,コツを掴む
+specify,特定
+precede,先行する、前に置く
+probability,確率
+prediction,予測
+cavity,虫歯
+rash,発疹
+dent,凹み
+inevitability,必然性
+intersection,交差点
+end up in,結局のところ
+expectation,期待
+furnished,家具付き
+narrow,狭い
+What's through here？,ここを抜けた先には何があるの？
+in the way,邪魔になって
+set off,出発する
+respond,応答する
+reluctantly,しぶしぶ
+suppose,仮定する
+clumsy,不器用な
+In the foreground,前方に
+In the background,後方に
+despite,にもかかわらず
+gadget,機器
+cramped,窮屈な
+delighted,喜んだ
+be dedicated to,〜に専念している
+typical,典型的な
+invest in,奮発して買う
+focused,集中した
+awareness,意識
+needn't have bothered,わざわざそんなことする必要がなかった
+silly,ばかな
+ended up ~ing,結局～することになった
+distractor,不正解の選択肢
+encourage,奨励する
+deprived,貧困層
+supply A with B,AにBを供給する
+reunite,再会させる
+split up,離れ離れにする
+inquirie,問い合わせ
+temperamental,気まぐれな
+typical,典型的な
+robbery,強盗
+hostage,人質
+fingerprint,指紋
+getaway,逃走
+gold bullion,金塊
+go off,作動する、キレる、腐る
+warranty,保証
+binoculars,双眼鏡
+camcorder,ビデオカメラ
+make it up to you,埋め合わせをする
+forgive,許す
+slip my mind,うっかり忘れる
+sort out,整理する
+encourage,奨励する
+discourage,落胆させる
+carry on with,続ける
+attractive,魅力的
+enquiries,お問い合わせ
+stuck,立ち往生
+chilly,肌寒い
+scruffy,みすぼらしい
+windowsill,窓枠
+assumption,予測
+pave,舗装する
+duration,間隔・期間
+settle in,落ち着く・定住する
+fumigated,燻蒸消毒する
+bushes,茂み
+lawn,芝生
+prevent,防ぐ
+abbreviate,省略する
+relatively,比較的
+dairy,乳製品の
+poultry,家禽（かきん：鶏やアヒルなど）
+fertilizer,肥料
+grain,穀物
+crop,作物
+insecticide,殺虫剤
+cattle,畜牛（ウシ）
+hydroponic,水耕栽培の
+herbicide,除草剤
+cucumber,きゅうり
+divide,分ける
+graze,放牧する、草を食べる
+livestock,家畜

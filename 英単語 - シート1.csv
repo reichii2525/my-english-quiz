@@ -1,183 +1,63 @@
 単語,意味
 confusing,紛らわしい
-repululsed,ぞっとする
-engrossed,夢中になる
-absorbed,心を奪われた
-baffled,困惑した
-dissuading,思いとどまらせる
-culmination,集大成
-infectious,感染性のある
-paralysis,麻痺
-crippled,不自由な
-eradicate,根絶する
 administer,管理する
-precaution,予防対策
-available,利用可能な
 imply,意味する
 decent,ちゃんとした
-depressing,気が滅入る
 specifying,特定する、詳しく述べる
-applicant,応募者
-candidates,候補者
-qualifications,資格
-confident,自信のある
-decisive,決断力のある
 speculate,推測する
-references,参照
-hang on,ちょっと待って
-assign,割り当てる
-protest,抗議
-investment,投資
-improve,改善する
-attract,引きつける
-unbearable,耐えられない
-councilor,評議員
-concern,懸念
-council,評議会
-mediate,仲介する
-consequence,結果
-assume,仮定する
 precise,"正確な
 "
-bizarre,奇妙な
-creeps,ゾッとする、薄気味悪い
-persuasively,説得力をもって
-persuade,説得する
-deny,拒否する
 particular,特定の
-regret,後悔する
-fail,失敗する
 implicit,暗黙の
-depressed,意気消沈した
 frightened,おびえた
-relieved,ほっとした
-occasion,行事
-mention,言及
-contract,契約
-evaluation,評価
-organize,整理する
 fidgeting,そわそわする
-suspicion,疑い
-suspicious,疑わしい
-excuse,言い訳
 attribute,属性
-individual,個人
 endurance,持久力
-determination,決断力
 discipline,鍛錬
-aggression,攻撃
 concentration,集中力
-reflexes,反射神経
-demanding,きつい
-coordination,調整
-essential,不可欠
 emphasizing,強調する
 misconception,誤解
-appropriate,適切な
-proposal,提案
-actual,実際の
-embed,埋め込む
-custom,習慣
-chase,追う、追跡
-practical,実用的な
-evaluate,評価する
-ridiculous,ばかばかしい
-convince,納得させる
-convincing,説得力のある
-argument,主張
 predictable,予測可能な
-solve,解決する
-tussle,格闘する
-currency,通貨
-indecisive,決断力のない
-shortlist,候補者名簿
-justifying,正当化する
-cost me a fortune,大金がかかった
-protesters,抗議活動参加者
-pushed for time,時間に追われている
-steer clear of ~,〜を避ける
-What’s eating you,何が不満なの？
-down in the dumps,ひどく落ち込んでいる
-It speaks for itself,一目瞭然だ
-without a doubt,間違いなく
-storage,保管・貯蔵
-extremely,非常に
-suggestion,提案
-scenic,景色のよい
 make a go of it,うまくやる、成功させる
-pull a prank on,～にいたずらをする
-practical joke,悪ふざけ
-hoax,でっち上げ
-sighting,目撃
-genuine,本物
-proof,証明
-incident,事件
 encourage,奨励する
 specify,特定
 precede,先行する、前に置く
 probability,確率
 prediction,予測
 inevitability,必然性
-expectation,期待
-reluctantly,しぶしぶ
-suppose,仮定する
 clumsy,不器用な
 despite,にもかかわらず
-cramped,窮屈な
-delighted,喜んだ
 be dedicated to,〜に専念している
-typical,典型的な
-invest in,奮発して買う
-focused,集中した
-awareness,意識
-silly,ばかな
-ended up ~ing,結局～することになった
 distractor,不正解の選択肢
 deprived,貧困層
 reunite,再会させる
-split up,離れ離れにする
 inquirie,問い合わせ
 temperamental,気まぐれな
-robbery,強盗
-hostage,人質
 getaway,逃走
-gold bullion,金塊
 go off,作動する、キレる、腐る
-warranty,保証
-binoculars,双眼鏡
-camcorder,ビデオカメラ
 make it up to you,埋め合わせをする
-forgive,許す
 slip my mind,うっかり忘れる
 sort out,整理する
 discourage,落胆させる
 carry on with,続ける
-attractive,魅力的
 enquiries,お問い合わせ
 stuck,立ち往生
 chilly,肌寒い
-scruffy,みすぼらしい
-windowsill,窓枠
+scruffy,みすぼらしい、だらしない
 assumption,予測
-pave,舗装する
 duration,間隔・期間
 settle in,落ち着く・定住する
 fumigated,燻蒸消毒する
-bushes,茂み
-lawn,芝生
 prevent,防ぐ
 abbreviate,省略する
 relatively,比較的
-dairy,乳製品の
 poultry,家禽（かきん：鶏やアヒルなど）
 fertilizer,肥料
 grain,穀物
-crop,作物
 insecticide,殺虫剤
 cattle,畜牛（ウシ）
 hydroponic,水耕栽培の
 herbicide,除草剤
-cucumber,きゅうり
 divide,分ける
 graze,放牧する、草を食べる
 livestock,家畜
@@ -189,22 +69,15 @@ I’ll leave it to you,あなたに任せるよ
 involve,関与する
 crucial,重要な
 carbohydrate,炭水化物
-cell,細胞
 horrible,ひどい
 metabolism,代謝
 regulate,整える
 digestive,消化器官
 consume,消費する
-contain,含む
-cozy,居心地の良い
-unwind,くつろぐ
-bumpy,揺れが激しい、でこぼこした
-bland,味が薄い
 portion,部分・量
 whereas,一方
 previously,以前は
 conditional,条件付きの
-aid,援助、補助
 overload,詰め込みすぎる、超負荷
 stick to,固執する
 coming along,順調に進んでいる
@@ -212,3 +85,61 @@ limit yourself to,制限する
 rehearse,リハーサルする
 front row,前列
 definite,明確な
+alternative,代替
+impulse buy,衝動買い
+lose track of time,時間を忘れる
+hectic,てんてこ舞いの
+worthwhile ～ing,～する価値のある
+dread,恐れる
+cram,詰め込む
+go through,詳しく調べる、目を通す
+relate,共感する、物語る、関連付ける
+tend to,～する傾向にある、よく～する
+behavior,行動、ふるまい、態度
+generous,気前が良い、おしみなく出す
+patient,忍耐強い、気長い
+fairly,まあまあ、そこそこ
+identify A as B,AをBであると特定する（見極める）
+key issue,主要な課題
+durability,耐久性
+color scheme,色彩計画、配色
+ugly,見栄えが悪い、不格好な
+admired,評判のいい
+genetic,遺伝的
+researcher,研究者
+medieval,中世の
+Why on earth ~ ?,一体全体なぜ〜なのか？
+bend,曲げる
+flaming,燃えるような
+clown,ピエロ
+hilarious,陽気な、爆笑
+efficiency,効率
+no-frills,飾り気のない
+surprisingly,驚くほど、意外にも
+insufficient,不十分
+storeroom,物置、倉庫
+outlet,コンセント
+tinsel,キラキラしたモール飾り
+come up with,思いつく
+nasty,汚い
+turn nasty,悪化する、攻撃的になる
+obvious,明らか
+beat,疲れきった、へとへとの
+exhausted,疲れ果てた
+secure,安全な、心配のない
+vital,重要な
+fit in with ~,〜に馴染む、溶け込む
+peer,仲間、同僚、同級生
+critical,重大な、致命的な
+imperative,必須の
+affordable,手頃な価格
+resign,辞職する
+accidentally,うっかり
+format ,初期化する
+have something to do with ~,〜と何か関係がある
+up-close,間近で
+column,コラム、列、柱
+ruin,台無しにする、破壊
+ruins,遺跡、廃墟
+intact,無傷の、手つかずのまま
+top up ~,～を満たす
